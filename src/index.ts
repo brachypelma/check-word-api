@@ -4,14 +4,10 @@ import getValidWords from "./get-valid-words"
 
 const encoder = new TextEncoder()
 
-export const handleRequest: HandleRequest = async (req: HttpRequest): Promise<HttpResponse> => {
-  const { uri } = req
+export const handleRequest: HandleRequest = async ({ uri }: HttpRequest): Promise<HttpResponse> => {
   const isValidRequest = uri.includes('?s=')
   const res: HttpResponse = { status: 200 }
-
-  if (!isValidRequest) return res
-
-  const words = getValidWords(getStringArray(uri))
+  const words = isValidRequest ? getValidWords(getStringArray(uri)) : []
   res.body = encoder.encode(JSON.stringify(words)).buffer
 
   return res
