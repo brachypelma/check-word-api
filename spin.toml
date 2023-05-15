@@ -1,0 +1,15 @@
+spin_manifest_version = "1"
+authors = ["Eric Jonas <ericdjonas@gmail.com>"]
+description = ""
+name = "check-word-api"
+trigger = { type = "http", base = "/" }
+version = "0.1.0"
+
+[[component]]
+id = "check-word-api"
+source = "target/check-word-api.wasm"
+exclude_files = ["**/node_modules"]
+[component.trigger]
+route = "/..."
+[component.build]
+command = "npm run build"
